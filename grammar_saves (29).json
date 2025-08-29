@@ -1,0 +1,147 @@
+{
+  "cylinder": {
+    "unique_name_identifier": "cylinder",
+    "saved_at": "2025-08-25T01:41:00.047Z",
+    "input_grammar": "X ->  R Radius ( 50 100 ) R* N ( 18 19 )  Cylinder \nCylinder 1 N Radius ->   MainCylinder \nMainCylinder 20 ->   A ( 360/N 1 ) [  T ( 1 0 0 ) I ( CubeX 2 0 1 )  ]"
+  },
+  "dy_cube_wedge": {
+    "unique_name_identifier": "dy_cube_wedge",
+    "saved_at": "2025-08-25T21:52:44.615Z",
+    "input_grammar": "X ->  D ( 1 0.45 1 ) I ( Cube 4 0 1.25 )"
+  },
+  "d_pyramid": {
+    "unique_name_identifier": "d_pyramid",
+    "saved_at": "2025-08-25T21:59:07.233Z",
+    "input_grammar": "X ->  A ( 270 0 ) D ( 0.1 0.1 0.5 ) I ( Cube 2 0 1.25 )"
+  },
+  "dtdt_cube": {
+    "unique_name_identifier": "dtdt_cube",
+    "saved_at": "2025-08-25T23:52:42.201Z",
+    "input_grammar": "X ->  DT ( 1 0.5 1 ) DS ( 1 1 0.5 ) I ( Cube 2 0 1.25 )"
+  },
+  "dsdt_cube_wedge_offset": {
+    "unique_name_identifier": "dsdt_cube_wedge_offset",
+    "saved_at": "2025-08-26T00:08:50.039Z",
+    "input_grammar": "X ->  DT ( 1 0.5 1 ) DS ( 1 0.5 1 ) I ( Cube 2 0 1.25 )"
+  },
+  "dy_cube_wedge-20250826-100920": {
+    "unique_name_identifier": "dy_cube_wedge-20250826-100920",
+    "saved_at": "2025-08-26T00:09:20.796Z",
+    "input_grammar": "X ->  DS ( 1 0.45 1 ) I ( Cube 4 0 1.25 )"
+  },
+  "ds_rotated_cube_wedge": {
+    "unique_name_identifier": "ds_rotated_cube_wedge",
+    "saved_at": "2025-08-26T00:25:53.854Z",
+    "input_grammar": "X -> T ( 0 0 2 ) Main\nMain 20 -> A ( 360/20.0 1 ) T ( 1 0 0 ) DS ( 2 0.45 1 ) [ A ( 180 1 ) A ( 270 2 ) I ( Cube 4 0 1.25 ) ]"
+  },
+  "hollow_cylinder": {
+    "unique_name_identifier": "hollow_cylinder",
+    "saved_at": "2025-08-26T00:35:35.551Z",
+    "input_grammar": "X -> T ( 0 0 2 ) S ( 1 10 1 ) Main\nMain 20 -> A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 ) [ A ( 180+10 1 ) A ( 270 2 ) I ( Cube 4 0 1.25 ) ]"
+  },
+  "ds_helix_cube_wedge": {
+    "unique_name_identifier": "ds_helix_cube_wedge",
+    "saved_at": "2025-08-26T00:53:51.518Z",
+    "input_grammar": "X -> T ( 0 0 2 ) Main\nMain 40 -> A ( 360/20.0 1 ) T ( 1 0.2 0 ) DS ( 2 0.45 1 ) [ A ( 180 1 ) A ( 270 2 ) I ( Cube 4 0 1.25 ) ]"
+  },
+  "ds_helix_cube_wedge-20250826-122658": {
+    "unique_name_identifier": "ds_helix_cube_wedge-20250826-122658",
+    "saved_at": "2025-08-26T02:26:58.443Z",
+    "input_grammar": "X -> T ( 0 0 2 ) Main\nMain 40 -> A ( 360/20.0 1 ) T ( 1 0.2 0 ) DS ( 2 0.45 1 ) Wedge\nWedge ->  [ A ( 180 1 ) A ( 270 2 ) I ( Cube 4 0 1 ) ]"
+  },
+  "helix_wedge_around_cylinder": {
+    "unique_name_identifier": "helix_wedge_around_cylinder",
+    "saved_at": "2025-08-26T02:43:56.073Z",
+    "input_grammar": "Vars -> R R1 ( 0.3 0.4 )  [ X ] SR_Cylinder\nX -> T ( 0 0 2 ) Main  \nSR_Cylinder 1 R1 ->  S ( R1 10 R1 )  Cylinder\nMain 40 -> A ( 360/20.0 1 ) T ( 1 0.2 0 ) DS ( 2 0.45 1 ) Wedge\nWedge ->  [ A ( 180 1 ) A ( 270 2 ) I ( Cube 4 0 1 ) ]\nCylinder 40 ->  A ( 360/40 1 ) T ( 1 0 0 ) DS ( 1 0.8 1 ) I ( Cube 3 0 1.2 ) "
+  },
+  "hollow_cylinder-20250827-152748": {
+    "unique_name_identifier": "hollow_cylinder-20250827-152748",
+    "saved_at": "2025-08-27T05:27:48.478Z",
+    "input_grammar": "X -> R R1 ( 1.0 9.0 ) R R2 ( 0.1 0.9 ) R R3 ( 0.9 5.0 ) R x ( 0.001 0.5 )  Z \nZ -> R y ( 0.0001 0.5 ) R z ( 0.0001 0.5 ) R  texid ( 0 22 ) [ Cylinder ] \nCylinder 2 R1 R2 -> [ T ( x*R3 y*R3 z*R3 ) S ( 1 R1 1 ) ] Main \nMain 20 -> A ( 360/20.0 1 ) T ( R2 0 0 ) DS ( 1 0.8 1 ) Cube1\nCube1 1 -> [ A ( 180+10 1 ) A ( 270 2 ) I ( Cube texid 0 1.25 ) ]"
+  },
+  "hollow_cylinder-script": {
+    "unique_name_identifier": "hollow_cylinder-script",
+    "saved_at": "2025-08-27T05:28:18.389Z",
+    "input_grammar": "X -> R R1 ( 1.0 9.0 ) R R2 ( 0.1 0.9 ) R R3 ( 0.9 5.0 ) R x ( 0.001 0.5 )\n     R N ( 3 40 ) R angle_offset ( 0 45 ) Z\n\nZ -> R y ( 0.0001 0.5 ) R z ( 0.0001 0.5 ) R texid ( 0 22 ) [ Cylinder ]\n\nCylinder 2 R1 R2 -> [\n    T ( x R3 y R3 z R3 )\n    S ( 1 R1 1 )\n] Main\n\nMain N -> [\n    A ( 360/N 1 )\n    T ( R2 0 0 )\n    DS ( 1 0.8 1 )\n    Cube1\n]\n\nCube1 1 -> [\n    A ( 180+angle_offset 1 )\n    A ( 270 2 )\n    I ( Cube texid 0 1 )\n]"
+  },
+  "brick_wall": {
+    "unique_name_identifier": "brick_wall",
+    "saved_at": "2025-08-28T04:39:36.960Z",
+    "input_grammar": "X -> T ( 0 0 2 ) S ( 1 1 1 ) Main\nMain -> WallY\nWallY 20 -> [ T ( -0.5 0 0 ) [ Wall ] ] T ( 0 1 0 ) [ Wall ] T ( 0 1 0 )\nWall 20 ->   T ( 1 0 0 ) [ S ( 0.95 0.95 0.05 ) I ( CubeX 2 0 1 ) ]"
+  },
+  "hollow_cylinder-script-20250828-143941": {
+    "unique_name_identifier": "hollow_cylinder-script-20250828-143941",
+    "saved_at": "2025-08-28T04:39:41.356Z",
+    "input_grammar": "X -> R R1 ( 1.0 9.0 ) R R2 ( 0.1 0.9 ) R R3 ( 0.9 5.0 ) R x ( 0.001 0.5 )\n     R N ( 3 40 ) R angle_offset ( 0 45 ) Z\n\nZ -> R y ( 0.0001 0.5 ) R z ( 0.0001 0.5 ) R texid ( 0 22 ) [ Cylinder ]\n\nCylinder 2 R1 R2 -> [\n    T ( x R3 y R3 z R3 )\n    S ( 1 R1 1 )\n] Main\n\nMain N -> [\n    A ( 360/N 1 )\n    T ( R2 0 0 )\n    DS ( 1 0.8 1 )\n    Cube1\n]\n\nCube1 1 -> [\n    A ( 180+angle_offset 1 )\n    A ( 270 2 )\n    I ( Cube texid 0 1 )\n]"
+  },
+  "cylinder_fan": {
+    "unique_name_identifier": "cylinder_fan",
+    "saved_at": "2025-08-28T04:50:52.444Z",
+    "input_grammar": "X -> Main\nMain ->  Blade\nBlade 20 ->  A ( 18 0 )  [ T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube 2 0 1 ) ]"
+  },
+  "cylinder_fan-20250828-154836": {
+    "unique_name_identifier": "cylinder_fan-20250828-154836",
+    "saved_at": "2025-08-28T05:48:36.170Z",
+    "input_grammar": "X -> Main\nMain -> Blade1 Blade2 Blade3 Blade4 [ S ( 0.6 0.25 0.25 ) A ( 90 2 ) Cylinder ]\nBlade1 20 ->  A ( 18 0 )  [ T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube 2 0 1 ) ]\nBlade2 20 ->  A ( 18 0 )  [ T ( 0 1.35 0.1 ) A ( 15 0 ) S ( 5 0.25 0.01 ) I ( Cube 2 0 1 ) ]\nBlade3 20 ->  A ( 18 0 )  [ T ( 0 1.65 0.3 ) A ( 45 0 ) S ( 5 0.25 0.01 ) I ( Cube 2 0 1 ) ]\nBlade4 20 ->  A ( 18 0 )  [ T ( 0 1.55 1 ) A ( 85 0 ) S ( 5 0.25 0.01 ) I ( Cube 2 0 1 ) ]\n\nCylinder -> T ( 0 0 2 ) S ( 1 10 1 ) CylinderMain\nCylinderMain 20 -> A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 ) [ A ( 180+10 1 ) A ( 270 2 ) I ( Cube 4 0 1.25 ) ]"
+  },
+  "cylinder_fan-20250828-155016": {
+    "unique_name_identifier": "cylinder_fan-20250828-155016",
+    "saved_at": "2025-08-28T05:50:16.639Z",
+    "input_grammar": "X -> Main\nMain -> Blade1 Blade2 Blade3 Blade4 [ S ( 0.6 0.25 0.25 ) A ( 90 2 ) Cylinder ]\nBlade1 20 ->  A ( 18 0 )  [ T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube 2 0 1 ) ]\nBlade2 20 ->  A ( 18 0 )  [ T ( 0 1.35 0.1 ) A ( 15 0 ) S ( 5 0.25 0.1 ) I ( Cube 2 0 1 ) ]\nBlade3 20 ->  A ( 18 0 )  [ T ( 0 1.65 0.3 ) A ( 45 0 ) S ( 5 0.25 0.1 ) I ( Cube 2 0 1 ) ]\nBlade4 20 ->  A ( 18 0 )  [ T ( 0 1.55 1 ) A ( 85 0 ) S ( 5 0.25 0.1 ) I ( Cube 2 0 1 ) ]\n\nCylinder -> T ( 0 0 2 ) S ( 1 10 1 ) CylinderMain\nCylinderMain 20 -> A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 ) [ A ( 180+10 1 ) A ( 270 2 ) I ( Cube 4 0 1.25 ) ]"
+  },
+  "cylinder_fan-20250828-155016-20250828-160841": {
+    "unique_name_identifier": "cylinder_fan-20250828-155016-20250828-160841",
+    "saved_at": "2025-08-28T06:08:41.881Z",
+    "input_grammar": "X ->  A ( 90 2 ) Main\nMain -> Blade1 Blade2 Blade3 Blade4 [ T ( 0 0.2 0.2 ) S ( 0.6 0.25 0.25 ) A ( 90 2 ) Cylinder ]\nBlade1 20 ->  A ( 18 0 )  [ T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube 2 0 1 ) ]\nBlade2 20 ->  A ( 18 0 )  [ T ( 0 1.35 0.1 ) A ( 15 0 ) S ( 5 0.25 0.1 ) I ( Cube 2 0 1 ) ]\nBlade3 20 ->  A ( 18 0 )  [ T ( 0 1.65 0.3 ) A ( 45 0 ) S ( 5 0.25 0.1 ) I ( Cube 2 0 1 ) ]\nBlade4 20 ->  A ( 18 0 )  [ T ( 0 1.55 1 ) A ( 85 0 ) S ( 5 0.25 0.1 ) I ( Cube 2 0 1 ) ]\n\nCylinder -> T ( 0 0 2 ) S ( 1 10 1 ) CylinderMain\nCylinderMain 20 -> A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 ) [ A ( 180+10 1 ) A ( 270 2 ) I ( Cube 4 0 1.25 ) ]"
+  },
+  "cylinder_fan-20250828-155016-20250828-160841-20250828-162236": {
+    "unique_name_identifier": "cylinder_fan-20250828-155016-20250828-160841-20250828-162236",
+    "saved_at": "2025-08-28T06:22:36.186Z",
+    "input_grammar": "X ->  A ( 90 2 ) Main\nMain -> Blade1 Blade2 Blade3 Blade4 [ T ( 0 0.2 0.2 ) S ( 0.6 0.25 0.25 ) A ( 90 2 ) Cylinder ]\nBlade1 20 ->  A ( 18 0 )  [ T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube 4 0 1 ) ]\nBlade2 20 ->  A ( 18 0 )  [ T ( 0 1.35 0.1 ) A ( 15 0 ) S ( 5 0.25 0.1 ) I ( Cube 2 0 1 ) ]\nBlade3 20 ->  A ( 18 0 )  [ T ( 0 1.65 0.3 ) A ( 45 0 ) S ( 5 0.25 0.1 ) I ( Cube 2 0 1 ) ]\nBlade4 20 ->  A ( 18 0 )  [ T ( 0 1.55 1 ) A ( 85 0 ) S ( 5 0.25 0.1 ) I ( Cube 2 0 1 ) ]\n\nCylinder -> T ( 0 0 2 ) S ( 1 10 1 ) CylinderMain\nCylinderMain 20 -> A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 )  Wedge\nWedge -> [ A ( 180+10 1 ) A ( 270 2 ) I ( Cube 1 0 1.25 ) ]"
+  },
+  "cylinder-prototype": {
+    "unique_name_identifier": "cylinder-prototype",
+    "saved_at": "2025-08-28T14:47:30.128Z",
+    "input_grammar": "X -> T ( 0 0 2 ) S ( 1 10 1 ) Vars\nVars -> R InnerRadius ( 0.3 1.7 ) R rt ( 2.3 3.4 ) R N ( 20 40 ) Axis Init\n\nInit 1 N InnerRadius rt -> Main\nMain 1 -> A ( 360.0/N 1 ) [ T ( 0 0 -0.5 ) T ( 0 0 -InnerRadius )  Wedge ]\nWedge ->  DS ( 1 (2.0*3.14159254*rt)/N 1 ) [ A ( 270 2 ) ScaleWedge ]\nScaleWedge -> S ( radial_thickness 1 1 ) I ( Cube 4 0 1.25 ) \nAxis -> [ S ( 0.01 10 0.01 ) I ( Cube 1 0 2.0 ) ]"
+  },
+  "cylinder-prototype-20250829-030013": {
+    "unique_name_identifier": "cylinder-prototype-20250829-030013",
+    "saved_at": "2025-08-28T17:00:13.992Z",
+    "input_grammar": "X -> T ( 0 0 2 ) S ( 1 10 1 ) Vars\nVars -> R InnerRadius ( 0.3 1.7 ) R rt ( 2.3 3.4 ) R N ( 20 40 ) Axis Init\n\nInit 1 N InnerRadius rt -> Main\nMain 1 -> A ( 360.0/N 1 ) [ T ( 1 0 0 ) Wedge ]\nWedge ->   [ ScaleWedge ]\nScaleWedge -> S ( 2.0*3.14159254*(rt+InnerRadius)/(N*1.0) 1 rt ) A ( 90 1 )  A ( 90 0 ) I ( CubeX 4 0 1.25 ) \nAxis -> [ S ( 0.01 10 0.01 ) I ( CubeX 1 0 2.0 ) ]"
+  },
+  "cylinder-prototype-20250829-030013-20250829-042129": {
+    "unique_name_identifier": "cylinder-prototype-20250829-030013-20250829-042129",
+    "saved_at": "2025-08-28T18:21:29.800Z",
+    "input_grammar": "X -> Vars\nVars -> R InnerRadius ( 1.7 1.7 ) R rt ( 2.3 3.4 ) R N ( 20 40 ) Axis Init\n\nInit 1 N InnerRadius rt -> Main\nMain N ->  [ T ( 0 0 InnerRadius+rt/2 ) Wedge ]  A ( 360.0/N 1 ) \nWedge ->   [ ScaleWedge ]\nScaleWedge -> S ( 2.0*3.14159254*(rt+InnerRadius)/(N*1.0) 1 rt ) A ( 90 1 )  A ( 90 0 ) I ( Cube 4 0 1.25 ) \nAxis -> [ I ( Cube 1 0 2.0 ) S ( 0.01 10 0.01 ) I ( CubeX 1 0 2.0 ) ]"
+  },
+  "cylinder-prototype-20250829-030013-20250829-042129-20250829-065515": {
+    "unique_name_identifier": "cylinder-prototype-20250829-030013-20250829-042129-20250829-065515",
+    "saved_at": "2025-08-28T20:55:15.081Z",
+    "input_grammar": "X -> Vars\nVars -> R InnerRadius ( 1.7 1.7 ) R rt ( 2.3 3.4 ) R N ( 20 40 ) Axis Init\n\nInit 1 N InnerRadius rt -> Main\nMain N ->  [ T ( 0 0 InnerRadius+rt/2 ) Wedge ]  A ( 360.0/N 1 ) \nWedge ->   [ ScaleWedge ]\nScaleWedge -> S ( 2.0*3.14159254*(rt+InnerRadius)/(N*1.0) 1 rt ) A ( 90 1 )  A ( 90 0 ) I ( Cube mossPatch 0 1.25 ) \nAxis -> [ I ( Cube 1 0 2.0 ) S ( 0.01 10 0.01 ) I ( CubeX 1 0 2.0 ) ]"
+  },
+  "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071235": {
+    "unique_name_identifier": "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071235",
+    "saved_at": "2025-08-28T21:12:35.922Z",
+    "input_grammar": "X ->  A ( 90 2 ) Main\nMain -> Blade1 Blade2 Blade3 Blade4 [ T ( 0 0.2 0.2 ) S ( 0.6 0.25 0.25 ) A ( 90 2 ) Cylinder ]\nBlade1 20 ->  A ( 18 0 )  [ T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube carbonFibre 0 1 ) ]\nBlade2 20 ->  A ( 18 0 )  [ T ( 0 1.35 0.1 ) A ( 15 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 ) ]\nBlade3 20 ->  A ( 18 0 )  [ T ( 0 1.65 0.3 ) A ( 45 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 ) ]\nBlade4 20 ->  A ( 18 0 )  [ T ( 0 1.55 1 ) A ( 85 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 ) ]\n\nCylinder -> T ( 0 0 2 ) S ( 1 10 1 ) CylinderMain\nCylinderMain 20 -> A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 )  Wedge\nWedge -> [ A ( 180+10 1 ) A ( 270 2 ) I ( Cube rawIron 0 1.25 ) ]"
+  },
+  "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071537": {
+    "unique_name_identifier": "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071537",
+    "saved_at": "2025-08-28T21:15:37.294Z",
+    "input_grammar": "X ->  A ( 90 2 ) Main\nMain -> Blade1 Blade2 Blade3 Blade4 [ T ( 0 0.2 0.2 ) S ( 0.6 0.25 0.25 ) A ( 90 2 ) Cylinder ]\nBlade1 20 ->  A ( 18 0 )  [ T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube carbonFiber 0 1 ) ]\nBlade2 20 ->  A ( 18 0 )  [ T ( 0 1.35 0.1 ) A ( 15 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 ) ]\nBlade3 20 ->  A ( 18 0 )  [ T ( 0 1.65 0.3 ) A ( 45 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 ) ]\nBlade4 20 ->  A ( 18 0 )  [ T ( 0 1.55 1 ) A ( 85 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 ) ]\n\nCylinder -> T ( 0 0 2 ) S ( 1 10 1 ) CylinderMain\nCylinderMain 20 -> A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 )  Wedge\nWedge -> [ A ( 180+10 1 ) A ( 270 2 ) I ( Cube rawIron 0 1.25 ) ]"
+  },
+  "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071537-20250829-075820": {
+    "unique_name_identifier": "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071537-20250829-075820",
+    "saved_at": "2025-08-28T21:58:20.525Z",
+    "input_grammar": "X ->  A ( 90 2 ) Main\n\nMain ->\n Blade1 Blade2 Blade3 Blade4\n [ \nT ( 0 0.2 0.2 ) S ( 0.6 0.25 0.25 ) A ( 90 2 )\n Cylinder\n ]\n\nBlade1 20 ->\n  A ( 18 0 )  [\n T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube carbonFiber 0 1 )\n ]\nBlade2 20 -> \n A ( 18 0 )  [ \nT ( 0 1.35 0.1 ) A ( 15 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 )\n ]\nBlade3 20 -> \n A ( 18 0 )  [ T ( 0 1.65 0.3 ) A ( 45 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 ) ]\nBlade4 20 ->\n  A ( 18 0 )  [ T ( 0 1.55 1 ) A ( 85 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 ) ]\n\nCylinder ->\n T ( 0 0 2 ) S ( 1 10 1 ) CylinderMain\n\nCylinderMain 20 ->\n A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 )  \nWedge\n\nWedge -> [ \nA ( 180+10 1 ) \nA ( 270 2 ) \nI ( Cube rawIron 0 1.25 ) \n]"
+  },
+  "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071537-202": {
+    "unique_name_identifier": "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071537-202",
+    "saved_at": "2025-08-28T22:17:11.950Z",
+    "input_grammar": "X ->  A ( 90 2 ) Main\n\nMain ->\n Blade1 Blade2 Blade3 Blade4\n [ \nT ( 0 0.2 0.2 ) S ( 0.6 0.25 0.25 ) A ( 90 2 )\n Cylinder\n ]\n\nBlade1 20 ->\n  A ( 18 0 )  [\n T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube carbonFiber 0 1 )\n ]\nBlade2 20 -> \n A ( 18 0 )  \n[ \n T ( 0 1.35 0.1 ) A ( 15 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 )\n]\nBlade3 20 -> \n A ( 18 0 ) \n [\n T ( 0 1.65 0.3 ) A ( 45 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 )\n ]\nBlade4 20 ->\n  A ( 18 0 ) \n [\n T ( 0 1.55 1 ) A ( 85 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 )\n ]\n\nCylinder ->\n T ( 0 0 2 ) S ( 1 10 1 ) CylinderMain\n\nCylinderMain 20 ->\n A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 )  \nWedge\n\nWedge -> [ \nA ( 180+10 1 ) \nA ( 270 2 ) \nI ( Cube rawIron 0 1.25 ) \n]"
+  },
+  "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071537-202-20250829-100444": {
+    "unique_name_identifier": "cylinder_fan-20250828-155016-20250828-160841-20250828-162236-20250829-071537-202-20250829-100444",
+    "saved_at": "2025-08-29T00:04:44.846Z",
+    "input_grammar": "X ->  A ( 90 2 ) Main\n\nMain -> Blade1 Blade2 Blade3 Blade4\n [ \nT ( 0 0.2 0.2 ) S ( 0.6 0.25 0.25 ) A ( 90 2 ) Cylinder\n ]\n\nBlade1 20 ->\n  A ( 18 0 )  [\n T ( 0 1 0 ) S ( 5 0.5 0.01 ) I ( Cube carbonFiber 0 1 )\n ]\nBlade2 20 -> \n A ( 18 0 )  \n[ \n T ( 0 1.35 0.1 ) A ( 15 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 )\n]\nBlade3 20 -> \n A ( 18 0 ) \n [\n T ( 0 1.65 0.3 ) A ( 45 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 )\n ]\nBlade4 20 ->\n  A ( 18 0 ) \n [\n T ( 0 1.55 1 ) A ( 85 0 ) S ( 5 0.25 0.1 ) I ( Cube polishedTitanium 0 1 )\n ]\n\nCylinder ->\n T ( 0 0 2 ) S ( 1 10 1 ) CylinderMain\n\nCylinderMain 20 ->\n A ( 360/20.0 1 ) T ( 0.9 0 0 ) DS ( 1 0.8 1 ) Wedge\n\nWedge -> [ \nA ( 180+10 1 ) \nA ( 270 2 ) \nI ( Cube rawIron 0 1.25 ) \n]"
+  }
+}
