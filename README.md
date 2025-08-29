@@ -4,7 +4,7 @@ Visual Grammar Editor written in javascript as a standalone html file.
 *By Pamela G. Hauff · 2025*
 
 <div class="screenshot">
-  ![ProGen3d_js.html](Screenshot 2025-08-29 220229.png "Screenshot of ProGen3d_js.html")]
+  <img title="Screenshot of ProGen3d_js.html" alt="ProGen3d_js.html" src="Screenshot 2025-08-29 220229.png">
 </div>
 
 ## Introduction
