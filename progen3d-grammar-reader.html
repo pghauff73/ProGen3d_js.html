@@ -3736,19 +3736,14 @@ function replacevars(s) {
 
   s = String(s);
 
-  for (let i = variable_list.length - 1; i >= 0; i--) {
-    const v = variable_list[i];
+  const escRe = (x) => String(x).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const sorted = [...variable_list].sort((a, b) => b.var_name.length - a.var_name.length);
 
-      const name = v.var_name;
-      const pos = s.indexOf(name);
-
-      if (pos !== -1) {
-        const before = s;
-        s = s.slice(0, pos) + String(v.value) + s.slice(pos + name.length);
-
-        break;
-      }
-    
+  for (let i = 0; i < sorted.length; i++) {
+    const v = sorted[i];
+    const name = v.var_name;
+    const re = new RegExp(`\\b${escRe(name)}\\b`, "g");
+    s = s.replace(re, String(v.value));
   }
 
   return s;
@@ -3758,19 +3753,16 @@ function replacevars(s) {
 function replacevars_ampersand(s) {
   s = String(s);
  // ReplaceVarsDebug.group(`replacevars_ampersand IN="${s}"`);
-  for (let i = 0; i < variable_list.length; i++) {
-    const v = variable_list[i];
+  const escRe = (x) => String(x).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const sorted = [...variable_list].sort((a, b) => b.var_name.length - a.var_name.length);
+
+  for (let i = 0; i < sorted.length; i++) {
+    const v = sorted[i];
     const name = v.var_name;
     const tag = "&" + name;
-    const pos = s.indexOf(tag);
-//    ReplaceVarsDebug.log(`scan[${i}] tag=${tag} pos=${pos}`);
-    if (pos !== -1) {
-      const rnd = v.getRandom();
-      const before = s;
-      s = s.slice(0, pos) + String(rnd) + s.slice(pos + tag.length);
-   //   ReplaceVarsDebug.log(`replaced "${tag}" at ${pos} with ${rnd}:`, `before="${before}"`, `after="${s}"`);
-      break;
-    }
+    const re = new RegExp(`&${escRe(name)}\\b`, "g");
+//    ReplaceVarsDebug.log(`scan[${i}] tag=${tag}`);
+    s = s.replace(re, () => String(v.getRandom()));
   }
 //  ReplaceVarsDebug.groupEnd();
   return s;
@@ -3781,7 +3773,7 @@ function MathS2_js(input){
   const X = new Solution();
   let s = String(input);
 
-s=replacevars(replacevars(replacevars(replacevars(replacevars(replacevars( replacevars(s)))))));
+s = replacevars(s);
 
   const out = X.Process(s);
   if (!Number.isFinite(out)) {
@@ -4792,16 +4784,18 @@ Recurse(rule){
   }
 
   // resolve repeat if rule.var_name is a math expr/symbol
+  let repeatCount = rule.repeat;
   if (rule.var_name !== "") {
     const v = parseFloat(this.MathS(rule.var_name));
     if (!Number.isFinite(v)) {
       throw new RuntimeGrammarError(`Repeat not finite for rule ${rule.rule_name}`);
     }
-    rule.repeat = v;
+    repeatCount = v;
   }
-  if (!Number.isFinite(rule.repeat) || rule.repeat < 0) {
+  if (!Number.isFinite(repeatCount) || repeatCount < 0) {
     throw new RuntimeGrammarError(`Bad repeat count for ${rule.rule_name}`);
   }
+  repeatCount = Math.trunc(repeatCount);
 
   // choose main vs alternate using probability
   if (rule.alternate) {
@@ -4839,7 +4833,7 @@ Recurse(rule){
     if (sec === 1) {
       const varCount = new Variable(rule.rule_name + "_count", 0, 0, true);
       variable_list.push(varCount);
-      for (let l = 0; l < rule.repeat; l++) {
+      for (let l = 0; l < repeatCount; l++) {
         varCount.value = l;
         runSection(rule.section_tokens[sec]);
       }
