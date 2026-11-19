@@ -1,0 +1,1 @@
+Open the reader, select **Wire, belt and sheet**, then enter a physics time in seconds. Both Run and STL export use the current deformed mesh. The native solver is loaded from adjacent static scripts only when needed. Keep the flexible-runtime directory beside the reader for offline use. The APK and hub use the same WebAssembly module.

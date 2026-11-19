@@ -129,7 +129,8 @@
       [data-theme] * {
         transition: var(--theme-transition);
       }
-    </style></head>
+    </style><script src="flexible-runtime/flexible-reader.js"></script>
+</head>
 
     <body class="" data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
         
@@ -1656,6 +1657,9 @@ const Vec3 = {
       let vtxCount = 0;
 
       for (const it of items) {
+        const triangleIndices=it.flexIndices || TRI_IDX;
+        const edgeIndices=it.flexEdges || EDGE_IDX;
+        const triangleUVs=it.flexUV || CUBE_TRI_UVS;
         // Map numeric index → preset name, else treat as string
         const texName = (typeof it.texIndex === "number")
           ? TEXTURE_NAMES[it.texIndex % TEXTURE_NAMES.length]
@@ -1666,17 +1670,17 @@ const Vec3 = {
         const start = vtxCount;
 
         // For each triangle: push pos/uv, compute flat normal and push 3 times
-        for (let tri=0; tri<TRI_IDX.length; tri+=3) {
-          const i0 = TRI_IDX[tri], i1 = TRI_IDX[tri+1], i2 = TRI_IDX[tri+2];
+        for (let tri=0; tri<triangleIndices.length; tri+=3) {
+          const i0 = triangleIndices[tri], i1 = triangleIndices[tri+1], i2 = triangleIndices[tri+2];
           const v0 = it.verts[i0], v1 = it.verts[i1], v2 = it.verts[i2];
 
           // positions
           triPositions.push(v0[0],v0[1],v0[2], v1[0],v1[1],v1[2], v2[0],v2[1],v2[2]);
 
           // UVs (pre-baked): index directly
-          const u0 = CUBE_TRI_UVS[(tri+0)*2], v0u = CUBE_TRI_UVS[(tri+0)*2+1];
-          const u1 = CUBE_TRI_UVS[(tri+1)*2], v1u = CUBE_TRI_UVS[(tri+1)*2+1];
-          const u2 = CUBE_TRI_UVS[(tri+2)*2], v2u = CUBE_TRI_UVS[(tri+2)*2+1];
+          const u0 = triangleUVs[(tri+0)*2], v0u = triangleUVs[(tri+0)*2+1];
+          const u1 = triangleUVs[(tri+1)*2], v1u = triangleUVs[(tri+1)*2+1];
+          const u2 = triangleUVs[(tri+2)*2], v2u = triangleUVs[(tri+2)*2+1];
           triUVs.push(u0*repeat, v0u*repeat, u1*repeat, v1u*repeat, u2*repeat, v2u*repeat);
 
           // flat normal per triangle
@@ -1685,16 +1689,16 @@ const Vec3 = {
           let nx = ay*bz - az*by;
           let ny = az*bx - ax*bz;
           let nz = ax*by - ay*bx;
-          const invLen = 1/Math.hypot(nx,ny,nz);
+          const invLen = 1/(Math.hypot(nx,ny,nz)||1);
           nx*=invLen; ny*=invLen; nz*=invLen;
           triNormals.push(nx,ny,nz, nx,ny,nz, nx,ny,nz);
         }
 
-        vtxCount += TRI_IDX.length;
+        vtxCount += triangleIndices.length;
 
         // Lines
-        for (let i=0;i<EDGE_IDX.length;i++){
-          const v = it.verts[EDGE_IDX[i]];
+        for (let i=0;i<edgeIndices.length;i++){
+          const v = it.verts[edgeIndices[i]];
           linePositions.push(v[0],v[1],v[2]);
         }
 
@@ -1702,7 +1706,7 @@ const Vec3 = {
           ? this.textureAlpha[texName]
           : 1.0;
 
-        const dc = { tex, first: start, count: TRI_IDX.length, alpha: alphaHint };
+        const dc = { tex, first: start, count: triangleIndices.length, alpha: alphaHint };
         this.drawCalls.push(dc);
         if (alphaHint < 1.0) this.transpCalls.push(dc); else this.opaqueCalls.push(dc);
       }
@@ -3562,7 +3566,10 @@ function printScene(scene){
   });
 
   /* ---------- Grammar pipeline with logging ---------- */
-  function runGrammarPipeline(text) {
+  const flexTime = ProGenFlexible.controls(goBtn,src, value => {
+    src.value=value; updateHighlight();
+  }, () => runGrammarPipeline(src.value));
+  async function runGrammarPipeline(text) {
     if (!scene || !renderer) {
       setStatus('Renderer not ready.');
       warn('[Pipeline] Renderer not ready.');
@@ -3574,6 +3581,14 @@ function printScene(scene){
       return;
     }
     try {
+      if (ProGenFlexible.accepts(text)) {
+        const items=await ProGenFlexible.compile(text,flexTime.seconds());
+        if (!items || src.value.trim()!==text.trim()) return;
+        scene.clear(); scene.items=items;
+        renderer.setScene(scene); renderer.invalidate?.();
+        setStatus('Flexible bodies at '+flexTime.seconds()+' s'); return;
+      }
+      ProGenFlexible.cancel();
       scene.clear?.();
       if (typeof Grammar !== 'function' || typeof prepare !== 'function') {
         throw new Error('Grammar/prepare not available globally.');
