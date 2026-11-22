@@ -2949,6 +2949,11 @@ const Vec3 = {
     setWireframe(on=true){ this.wireframe = !!on; this.invalidate(); }
     setLineColor(r=0,g=0,b=0,a=0.3){ this.lineColor.set([r,g,b,a]); this.invalidate(); }
     setScene(scene) {
+      if (scene?.reuseMesh && window.ProGenReuse) {
+        this.scene = scene;
+        ProGenReuse.display(this, scene.reuseMesh, (...buffers) => this.#uploadAll(...buffers));
+        return;
+      }
       if (!scene || typeof scene.getAll !== "function")
         throw new Error("setScene expects a Scene instance with getAll().");
       this.scene = scene;
@@ -3297,6 +3302,7 @@ const Vec3 = {
     }
 // ---------------- STL Export ----------------
 exportSTL(filename = "scene.stl") {
+  if (this.scene?.reuseMesh) { ProGenReuse.exportSTL(this.scene.reuseMesh, filename); return; }
   if (!this.scene || typeof this.scene.getAll !== "function") {
     console.error("STLExporter: No valid scene set.");
     return;
@@ -3496,7 +3502,7 @@ class Scene {
     return item;
   }
 
-  clear() { this.items.length = 0; }
+  clear() { this.items.length = 0; delete this.reuseMesh; }
   getAll() { return this.items.slice(); }
 }
             </script>    
@@ -5011,7 +5017,12 @@ function printScene(scene){
 }
             </script>    
     
-            <script>       
+            <script src="reuse/catalogue.js"></script>
+<script src="reuse/reuse-language.js"></script>
+<script src="reuse/native-engine.js"></script>
+<script src="reuse/engine-bytes.js"></script>
+<script src="reuse/reuse-editor.js"></script>
+<script>       
             /* = Integrated Editor + Renderer + Tutorial (with DOM console) ================== */
 (function () {
   'use strict';
@@ -5166,7 +5177,7 @@ document.getElementById('exportSTL').addEventListener('click', () => {
   });
 
   /* ---------- Grammar pipeline with logging ---------- */
-  function runGrammarPipeline(text) {
+  async function runGrammarPipeline(text) {
     if (!scene || !renderer) {
       setStatus('Renderer not ready.');
       warn('[Pipeline] Renderer not ready.');
@@ -5178,6 +5189,15 @@ document.getElementById('exportSTL').addEventListener('click', () => {
       return;
     }
     try {
+      if (window.ProGenReuse?.handles(text)) {
+        const mesh = await ProGenReuse.render(text, src, scene, renderer);
+        if (mesh) {
+          setStatus('Done · ' + mesh.triangles + ' triangles');
+          info('Reuse model built: ' + mesh.parts.length + ' primitives, ' + mesh.triangles + ' triangles.');
+        }
+        return;
+      }
+      window.ProGenReuse?.cancel(renderer);
       scene.clear?.();
       if (typeof Grammar !== 'function' || typeof prepare !== 'function') {
         throw new Error('Grammar/prepare not available globally.');

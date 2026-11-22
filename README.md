@@ -1,4 +1,6 @@
 # ProGen3d_js.html
+
+Both HTML editors support the 419-entry ProGen3D reuse database 1.4.0. Open **Reuse database** in the editor to find a part, adjust its parameters and run it. See [using and rebuilding the catalogue](reuse/README.md).
 Visual Grammar Editor written in javascript as a standalone html file.
 # ProGen3d_js — A Visual Grammar Engine for Procedural 3D Design
 *By Pamela G. Hauff · 2025*
